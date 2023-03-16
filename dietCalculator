@@ -1,0 +1,141 @@
+/*
+This diet is based on rpstrength.com.
+It calculates gram of meat and carbs based on your necessary amount of protein and carbs.
+Put a number to choose, and it will display your daily diet to consume.
+*/
+
+#include <iostream>
+using namespace std;
+
+int proteinCalculator(int protein, int proteinAmount) {
+    if(protein == 1 || protein == 3) return proteinAmount / 0.27;
+    else if(protein == 2)  return proteinAmount / 0.26;
+    else return proteinAmount / 0.22;
+    
+    return 0;
+}
+
+int carbsCalculator(int carbs, int carbsAmount) {
+    if(carbs == 1) return carbsAmount / 0.28;
+    else if(carbs == 2) return carbsAmount / 0.25;
+    
+    return 0;
+}
+
+void dietDisplayRepeator(string proteinName, string carbsName, int proteinGram, int carbsGram, int count) {
+    for(int i = 0;i<count;i++ ) {
+             cout << proteinName << " " << proteinGram << "g, " << carbsName << carbsGram << "g" << endl;
+    }
+}
+
+void displayDiet(int proteinGram, int carbsGram, int scheduleChoise, int proteinType, int carbsType) {
+     string proteinName;
+     string carbsName;
+     
+     if(proteinType == 1) proteinName = "Chicken";
+     if(proteinType == 2) proteinName = "Beef";
+     if(proteinType == 3) proteinName = "Pork";
+     if(proteinType == 4) proteinName = "Fish";
+     
+     if(carbsType == 1) carbsName = "Rice";
+     if(carbsType == 2) carbsName = "Pasta";
+     
+     cout << "---------------------Your Diet Plan---------------------" << endl;
+     
+     if(scheduleChoise == 1) {
+         cout << "One scoop whey in water" << endl;
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,4);
+         cout << "One scoop caseIn in water" << endl;
+     }
+     else if(scheduleChoise == 2) {
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,1);
+         cout << "One scoop whey in water" << endl;
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,3);
+         cout << "One scoop caseIn in water" << endl;
+     } 
+     else if(scheduleChoise == 3) {
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,2);
+         cout << "One scoop whey in water" << endl;
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,2);
+         cout << "One scoop caseIn in water" << endl;
+     }
+     else if(scheduleChoise == 4) {
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,3);
+         cout << "One scoop whey in water" << endl;
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,1);
+         cout << "One scoop caseIn in water" << endl;
+     }
+     else if(scheduleChoise == 5) {
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,4);
+         cout << "One scoop whey in water" << endl;
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,1);
+         cout << "One scoop caseIn in water" << endl;
+     }
+     else if(scheduleChoise == 6) {
+         dietDisplayRepeator(proteinName,carbsName,proteinGram,carbsGram,4);
+         cout << "One scoop caseIn in water" << endl;
+     }
+     
+     cout << "---------------------------------------------------------" << endl;
+    
+} 
+
+
+int main()
+{
+    int selection;
+    
+    cout << "Choose your diet" << endl;
+    cout << "Put 1 or 2 depending on your choise" << endl;
+    cout << "1. Decide your training plan" << endl;
+    cout << "2. Choose from your favorite diet plan" << endl;
+    
+    cin >> selection;
+    if(selection == 1) {
+        int scheduleChoise;
+        cout << "How do you want to schedule your diet?" << endl;
+        cout << "1.First thing AM training " << endl;
+        cout << "2.Training after 1 meal" << endl;
+        cout << "3.Training after 2 meals " << endl;
+        cout << "4.Training after 3 meals " << endl;
+        cout << "5.Training after 4 meals " << endl;
+        cout << "6. Non-weight training day " << endl;
+        cin >> scheduleChoise;
+        
+        int proteinAmount; 
+        cout << "Tell me how much gram do you need to consume protein in one meal?" << endl;
+        cin >> proteinAmount;
+        
+        int carbsAmount;
+        cout << "Tell me how much gram do you need to consume carbs in one meal?" << endl;
+        cin >> carbsAmount;
+        
+        int proteinType;
+        cout << "Choose the type of protein from the list" << endl;
+        cout << "1. Chicken" << endl;
+        cout << "2. Beef" << endl;
+        cout << "3. Pork" << endl;
+        cout << "4. Fish" << endl;
+        cin >> proteinType;
+        
+        int carbsType;
+        cout << "Choose the type of carbs from the list" << endl;
+        cout << "1. Rice" << endl;
+        cout << "2. Pasta" << endl;
+        cin >> carbsType;
+        
+        int proteinGram = proteinCalculator(proteinType, proteinAmount); 
+        int carbsGram = carbsCalculator(carbsType, carbsAmount);
+        
+        displayDiet(proteinGram,carbsGram,scheduleChoise, proteinType, carbsType);
+        
+        
+        
+        
+    } else if (selection == 2) {
+        cout << "Display their favorite menu." << endl;
+    }
+    
+    
+    return 0;
+}
